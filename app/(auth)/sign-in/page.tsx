@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import toast from 'react-hot-toast';
-import { signIn } from '@/lib/utils/user.utils';
 import { useRouter } from 'next/navigation';
+import { signInUser } from '@/lib/actions/user/signIn.action';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -17,10 +17,15 @@ const Page = () => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
 
-    await signIn(formData)
+    const payload = {
+      email: formData.get('email') as string,
+      password: formData.get('password') as string,
+    }
+
+    await signInUser(payload)
       .then((response) => {
         toast.success(response);
-        router.push('/home');
+        router.push('/game/overview');
       })
       .catch((error) => {
         toast.error(error.message)

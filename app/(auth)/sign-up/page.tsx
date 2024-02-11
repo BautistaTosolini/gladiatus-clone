@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import toast from 'react-hot-toast';
-import { signUp } from '@/lib/utils/user.utils';
 import { useRouter } from 'next/navigation';
+import { SignUpUser } from '@/lib/actions/user/signUp.action';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -17,11 +17,18 @@ const Page = () => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
 
-    await signUp(formData)
+    const payload = {
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      password: formData.get('password') as string,
+      repeatedPassword: formData.get('repeatedPassword') as string,
+    }
+
+    await SignUpUser(payload)
       .then((response) => {
         console.log(response)
         toast.success(response);
-        router.push('/home')
+        router.push('/game/overview')
       })
       .catch((error) => {
         toast.error(error.message)
