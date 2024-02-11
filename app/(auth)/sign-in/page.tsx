@@ -23,12 +23,11 @@ const Page = () => {
     }
 
     await signInUser(payload)
-      .then((response) => {
-        toast.success(response);
+      .then(() => {
         router.push('/game/overview');
       })
       .catch((error) => {
-        toast.error(error.message)
+        toast.error(error.message);
       });
   }
 

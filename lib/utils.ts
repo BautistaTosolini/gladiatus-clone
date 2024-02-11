@@ -7,6 +7,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+// extracts the user id from the jwt and returns it
 export function extractUserId(token: RequestCookie) {
   const { value } = token;
 

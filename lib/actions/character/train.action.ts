@@ -7,8 +7,16 @@ import { connectToDB } from '@/lib/mongoose';
 import { extractUserId } from '@/lib/utils';
 import { cookies } from 'next/headers';
 
-// extracts the user id from the jwt and returns the user object if it is valid
-export async function authenticateUser() {
+const statsList = [
+  'strength',
+  'endurance',
+  'agility',
+  'dexterity',
+  'intelligence',
+  'charisma',
+];
+
+export async function trainCharacter(stat: string) {
   const token = cookies().get(COOKIE_NAME);
 
   if (!token) throw new Error('Unathorized');
@@ -22,11 +30,24 @@ export async function authenticateUser() {
       .populate({
         path: 'character',
         model: Character,
-      });
+      })
 
     if (!user) throw new Error('Unauthorized');
 
-    return JSON.parse(JSON.stringify(user));
+    const character = user.character;
+
+    if (!statsList.includes(stat)) throw new Error('Stat not found');
+
+    const requiredCrowns = Math.pow(character[stat], 2) + character[stat] + 1;
+
+    if (character.crowns < requiredCrowns) throw new Error('Not enough crowns');
+
+    character.crowns -= requiredCrowns;
+    character[stat]++;
+
+    await character.save();
+
+    return JSON.parse(JSON.stringify(character));
 
   } catch (error) {
     console.log(`${new Date} - Failed to authenticate user - ${error}`)
