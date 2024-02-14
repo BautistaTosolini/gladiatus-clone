@@ -2,45 +2,22 @@
 
 import Image from 'next/image';
 import DescriptionCard from '@/components/shared/DescriptionCard';
-import { stats } from '@/constants';
 import { CharacterInterface } from '@/lib/interfaces/character.interface';
 import TrainStat from '@/components/shared/TrainStat';
 import { useState } from 'react';
 import { trainCharacter } from '@/lib/actions/character/train.action';
 import toast from 'react-hot-toast';
 
-interface Stat {
-  strength: number;
-  endurance: number;
-  agility: number;
-  dexterity: number;
-  intelligence: number;
-  charisma: number;
-  [key: string]: any;
-}
+const calculateStatCost = (stat: number) => Math.pow(stat, 2) + stat + 1;
 
 const TrainingContent = ({ character }: { character: CharacterInterface }) => {
-  const [characterStats, setCharacterStats] = useState<Stat>({
-    strength: character.strength,
-    endurance: character.endurance,
-    agility: character.agility,
-    dexterity: character.dexterity,
-    intelligence: character.intelligence,
-    charisma: character.charisma,
-  });
+  const [characterInfo, setCharacterInfo] = useState(character);
   const [characterCrowns, setCharacterCrowns] = useState(character.crowns);
 
   const handleClick = async (stat: string) => {
     await trainCharacter(stat)
       .then((updatedCharacter) => {
-        setCharacterStats({
-          strength: updatedCharacter.strength,
-          endurance: updatedCharacter.endurance,
-          agility: updatedCharacter.agility,
-          dexterity: updatedCharacter.dexterity,
-          intelligence: updatedCharacter.intelligence,
-          charisma: updatedCharacter.charisma,
-        });
+        setCharacterInfo(updatedCharacter);
         setCharacterCrowns(updatedCharacter.crowns);
       })
       .catch((error) => {
@@ -75,17 +52,54 @@ const TrainingContent = ({ character }: { character: CharacterInterface }) => {
         </DescriptionCard>
       </div>
       <div className='brown-card flex flex-col text-sm rounded-sm'>
-        {stats.map((stat, index) => (
-          <div key={index}>
-            <TrainStat 
-              statName={stat.name}
-              statValue={characterStats[stat.id]}
-              handleClick={() => handleClick(stat.id)}
-              characterCrowns={character.crowns}
-              last={index === stats.length - 1 ? true : false}
-            />
-          </div>
-        ))}
+        <TrainStat 
+          statName='Strength'
+          statValue={characterInfo.strength}
+          handleClick={() => handleClick('strength')}
+          crownsValue={calculateStatCost(characterInfo.strength)}
+          characterCrowns={characterInfo.crowns}
+        />
+
+        <TrainStat 
+          statName='Endurance'
+          statValue={characterInfo.endurance}
+          handleClick={() => handleClick('endurance')}
+          crownsValue={calculateStatCost(characterInfo.endurance)}
+          characterCrowns={characterInfo.crowns}
+        />
+
+        <TrainStat 
+          statName='Agility'
+          statValue={characterInfo.agility}
+          handleClick={() => handleClick('agility')}
+          crownsValue={calculateStatCost(characterInfo.agility)}
+          characterCrowns={characterInfo.crowns}
+        />
+
+        <TrainStat 
+          statName='Dexterity'
+          statValue={characterInfo.dexterity}
+          handleClick={() => handleClick('dexterity')}
+          crownsValue={calculateStatCost(characterInfo.dexterity)}
+          characterCrowns={characterInfo.crowns}
+        />
+
+        <TrainStat 
+          statName='Intelligence'
+          statValue={characterInfo.intelligence}
+          handleClick={() => handleClick('intelligence')}
+          crownsValue={calculateStatCost(characterInfo.intelligence)}
+          characterCrowns={characterInfo.crowns}
+        />
+
+        <TrainStat 
+          statName='Charisma'
+          statValue={characterInfo.charisma}
+          handleClick={() => handleClick('charisma')}
+          crownsValue={calculateStatCost(characterInfo.charisma)}
+          characterCrowns={characterInfo.crowns}
+          last
+        />
       </div>
     </>
   )

@@ -1,22 +1,18 @@
 'use client'
 
-import { trainCharacter } from '@/lib/actions/character/train.action';
 import Image from 'next/image';
 import { useState } from 'react';
-import toast from 'react-hot-toast';
 
 interface TrainStatProps {
   statName: string;
   statValue: number;
   last?: boolean;
   characterCrowns: number;
+  crownsValue: number;
   handleClick: () => void;
 }
 
-const calculateCrowns = (stat: number) => Math.pow(stat, 2) + stat + 1;
-
-const TrainStat = ({ statName, statValue, characterCrowns, handleClick, last = false }: TrainStatProps) => {
-  const crownsValue = calculateCrowns(statValue)
+const TrainStat = ({ statName, statValue, characterCrowns, handleClick, crownsValue, last = false }: TrainStatProps) => {
   const canTrain = characterCrowns > crownsValue;
 
   return (
