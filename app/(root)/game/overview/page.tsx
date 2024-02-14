@@ -1,19 +1,19 @@
-'use client'
-
-import { useContext } from 'react';
-
-import { UserContext } from '@/app/(root)/game/layout';
 import CharacterCard from '@/components/shared/CharacterCard';
+import { authenticateUser } from '@/lib/actions/user/authenticate.action';
+import { redirect } from 'next/navigation';
 
-const Page = () => {
-  const user = useContext(UserContext);
-  const character = user?.character;
+const Page = async () => {
+  const user = await authenticateUser().catch(() => redirect('/'));
+
+  if (!user) return null;
+
+  if (!user.character) redirect('/onboarding');
 
   return (
-    <div className='w-full mt-16 mb-4 px-10 flex flex-row justify-between gap-8'>
-      <CharacterCard character={character!} />
+    <div className='px-10 flex flex-row justify-between gap-8'>
+      <CharacterCard character={user.character} />
     </div>
   )
 }
 
-export default Page
+export default Page;

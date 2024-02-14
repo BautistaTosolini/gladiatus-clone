@@ -3,26 +3,26 @@ export const MAX_TOKEN_AGE = 3 * 24 * 60; // 30 days
 export const stats = [
   {
     name: 'Strength',
-    value: 'strength',
+    id: 'strength',
   },
   {
     name: 'Endurance',
-    value: 'endurance',
+    id: 'endurance',
   },
   {
     name: 'Agility',
-    value: 'agility',
+    id: 'agility',
   },
   {
     name: 'Dexterity',
-    value: 'dexterity',
+    id: 'dexterity',
   },
   {
     name: 'Intelligence',
-    value: 'intelligence',
+    id: 'intelligence',
   },
   {
     name: 'Charisma',
-    value: 'charisma',
+    id: 'charisma',
   },
 ]

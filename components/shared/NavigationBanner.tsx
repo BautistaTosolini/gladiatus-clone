@@ -1,3 +1,6 @@
+'use client'
+
+import { expeditionRoutes, generalRoutes, villageRoutes } from '@/constants/routes';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -5,47 +8,6 @@ const NavigationBanner = () => {
   const pathname = usePathname();
 
   const isOnboarding = pathname === '/onboarding';
-
-  const generalRoutes = [
-    {
-      name: 'Overview',
-      link: '/overview',
-    },
-    {
-      name: 'Highscore',
-      link: '/highscore',
-    },
-  ]
-  
-  const villageRoutes = [
-    {
-      name: 'Arena',
-      link: '/arena',
-    },
-    {
-      name: 'Training',
-      link: '/training',
-    },
-    {
-      name: 'Shop',
-      link: '/shop',
-    },
-  ]
-
-  const expeditionRoutes = [
-    {
-      name: 'Grimwood Forest',
-      link: '/grimwood',
-    },
-    {
-      name: 'Bandit Settlement',
-      link: '/bandit',
-    },
-    {
-      name: 'Ancient Crypt',
-      link: '/crypt',
-    },
-  ]
 
   return (
     <div className={`min-h-full w-[200px] main-red-card pt-14 flex flex-col gap-2 px-1 ${isOnboarding && 'hidden'}`}>
@@ -93,7 +55,7 @@ const NavigationBanner = () => {
           <Link 
             className={`red-card text-cream2 text-center font-semibold text-md cursor-pointer hover:text-gold hover:border-gold transition rounded-sm ${isActive && 'nav-banner-active'}`}
             key={route.name}
-            href={`/game${route.link}`}
+            href={`/game/expeditions${route.link}`}
           >
             {route.name}
           </Link>

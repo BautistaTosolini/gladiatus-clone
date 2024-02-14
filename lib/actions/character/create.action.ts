@@ -1,7 +1,8 @@
 'use server'
 
 import { COOKIE_NAME } from '@/constants';
-import Character from '@/lib/models/character.models';
+import Character from '@/lib/models/character.model';
+import Journal from '@/lib/models/journal.model';
 import User from '@/lib/models/user.model';
 import { connectToDB } from '@/lib/mongoose';
 import { extractUserId } from '@/lib/utils';
@@ -34,14 +35,20 @@ export async function createCharacter({ name, gender }: CreateCharacterParams) {
       owner: user._id,
     })
 
-    user.character = character._id;
+    const journal = await Journal.create({
+      owner: character._id,
+    })
 
-    user.save();
+    character.journal = journal._id;
+    await character.save();
+
+    user.character = character._id;
+    await user.save();
 
     return 'Character created successfully';
 
   } catch (error) {
-    console.log(`${new Date} - Failed to authenticate user - ${error}`)
+    console.log(`${new Date} - Failed to create character - ${error}`);
     throw error;
   }
 }

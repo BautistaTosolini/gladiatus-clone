@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <div className='w-full flex justify-center items-center min-h-screen bg-cover' style={{ backgroundImage: 'url("/bg-image.jpg")' }}>
+        <div className='w-full flex justify-center items-center min-h-screen bg-cover' style={{ backgroundImage: 'url("/images/landing-page-image.jpg")' }}>
           <Toaster
             toastOptions={{
               className: '',

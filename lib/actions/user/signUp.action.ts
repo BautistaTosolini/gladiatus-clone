@@ -58,7 +58,7 @@ export async function SignUpUser({ name, email, password, repeatedPassword }: Si
     return 'User created successfully';
 
   } catch (error: any) {
-    console.log(`${new Date} - Failed to sign up user - ${error}`)
+    console.log(`${new Date} - Failed to sign up user - ${error}`);
     throw error;
   }
 }

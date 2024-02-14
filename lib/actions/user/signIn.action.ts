@@ -42,7 +42,7 @@ export async function signInUser({ email, password }: signInUserParams) {
     throw new Error(`Invalid E-Mail or password`);
 
   } catch (error) {
-    console.log(`${new Date} - Failed to sign in user - ${error}`)
+    console.log(`${new Date} - Failed to sign in user - ${error}`);
     throw error;
   }
 }

@@ -1,6 +1,7 @@
 import Image from 'next/image';
-import { CharacterInterface } from '@/interfaces/character.interface';
+import { CharacterInterface } from '@/lib/interfaces/character.interface';
 import { stats } from '@/constants';
+import { calculatePower } from '@/lib/utils/characterUtils';
 
 function roundDownToNearestMultipleOf10(level: number): number {
   if (level > 80) return 80;
@@ -60,15 +61,27 @@ const CharacterCard = ({ character }: { character: CharacterInterface }) => {
         </div>
 
         {stats.map((stat, index) => (
-          <div className={`px-2 ${index === stats.length - 1 ? '' : 'border-b-[2px] border-cream2'}`}>
+          <div 
+            className='px-2 border-b-[2px] border-cream2'
+            key={index}
+          >
             <div className='flex justify-between text-sm'>
               {stat.name}:
               <span className='flex justify-center items-center font-semibold gap-2 text-red3'>
-                {character[stat.value]}
+                {character[stat.id]}
               </span>
             </div>
           </div>
         ))}
+
+        <div className='border-cream2 px-2'>
+          <div className='flex justify-between text-sm'>
+            Total Power:
+            <span className='flex justify-center items-center font-semibold gap-2 text-red3'>
+              {calculatePower(character)}
+            </span>
+          </div>
+        </div>
 
       </div>
     </div>
