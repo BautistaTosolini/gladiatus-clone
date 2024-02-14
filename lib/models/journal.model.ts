@@ -6,7 +6,15 @@ const journalSchema = new mongoose.Schema({
     ref: 'Character',
   },
   arena: {
-    type: Object,
+    type: {
+      battles: Number,
+      wins: Number,
+      defeats: Number,
+      draws: Number,
+      damageInflicted: Number,
+      damageReceived: Number,
+      honourEarned: Number,
+    },
     default: {
       battles: 0,
       wins: 0,
@@ -18,7 +26,15 @@ const journalSchema = new mongoose.Schema({
     },
   },
   world: {
-    type: Object,
+    type: {
+      battles: Number,
+      wins: Number,
+      defeats: Number,
+      draws: Number,
+      damageInflicted: Number,
+      damageReceived: Number,
+      honourEarned: Number,
+    },
     default: {
       battles: 0,
       wins: 0,
@@ -30,7 +46,98 @@ const journalSchema = new mongoose.Schema({
     },
   },
   zones: {
-    type: Object,
+    type: {
+      grimwood: {
+        rat: {
+          knowledge: Number,
+          battles: Number,
+          wins: Number,
+          defeats: Number,
+          draws: Number,
+        },
+        lynx: {
+          knowledge: Number,
+          battles: Number,
+          wins: Number,
+          defeats: Number,
+          draws: Number,
+        },
+        wolf: {
+          knowledge: Number,
+          battles: Number,
+          wins: Number,
+          defeats: Number,
+          draws: Number,
+        },
+        bear: {
+          knowledge: Number,
+          battles: Number,
+          wins: Number,
+          defeats: Number,
+          draws: Number,
+        },
+      },
+      bandit: {
+        slave: {
+          knowledge: Number,
+          battles: Number,
+          wins: Number,
+          defeats: Number,
+          draws: Number,
+        },
+        mercenary: {
+          knowledge: Number,
+          battles: Number,
+          wins: Number,
+          defeats: Number,
+          draws: Number,
+        },
+        berserker: {
+          knowledge: Number,
+          battles: Number,
+          wins: Number,
+          defeats: Number,
+          draws: Number,
+        },
+        chief: {
+          knowledge: Number,
+          battles: Number,
+          wins: Number,
+          defeats: Number,
+          draws: Number,
+        },
+      },
+      crypt: {
+        draug: {
+          knowledge: Number,
+          battles: Number,
+          wins: Number,
+          defeats: Number,
+          draws: Number,
+        },
+        drowned: {
+          knowledge: Number,
+          battles: Number,
+          wins: Number,
+          defeats: Number,
+          draws: Number,
+        },
+        ancient: {
+          knowledge: Number,
+          battles: Number,
+          wins: Number,
+          defeats: Number,
+          draws: Number,
+        },
+        soulless: {
+          knowledge: Number,
+          battles: Number,
+          wins: Number,
+          defeats: Number,
+          draws: Number,
+        },
+      },
+    },
     default: {
       grimwood: {
         rat: {

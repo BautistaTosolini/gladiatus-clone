@@ -24,7 +24,7 @@ export async function SignUpUser({ name, email, password, repeatedPassword }: Si
   try {
     connectToDB();
 
-    const isNameTaken = await User.findOne({ username: name.toLowerCase() });
+    const isNameTaken = await User.findOne({ username: name.toLowerCase().trim() });
 
     if (isNameTaken) throw new Error('Name is already taken');
 
