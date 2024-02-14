@@ -16,7 +16,7 @@ export interface CharacterInterface {
   charisma: number;
   onboarded: boolean;
   gender: 'male' | 'female';
-  honour: number;
+  honor: number;
   power: number;
   battleReport: BattleReport;
   [key: string]: any;

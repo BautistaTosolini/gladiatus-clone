@@ -13,7 +13,7 @@ const journalSchema = new mongoose.Schema({
       draws: Number,
       damageInflicted: Number,
       damageReceived: Number,
-      honourEarned: Number,
+      honorEarned: Number,
     },
     default: {
       battles: 0,
@@ -22,7 +22,7 @@ const journalSchema = new mongoose.Schema({
       draws: 0,
       damageInflicted: 0,
       damageReceived: 0,
-      honourEarned: 0,
+      honorEarned: 0,
     },
   },
   world: {
@@ -33,7 +33,7 @@ const journalSchema = new mongoose.Schema({
       draws: Number,
       damageInflicted: Number,
       damageReceived: Number,
-      honourEarned: Number,
+      honorEarned: Number,
     },
     default: {
       battles: 0,

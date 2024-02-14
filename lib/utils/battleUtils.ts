@@ -79,3 +79,13 @@ export function calculateCriticalDamage(attacker: CharacterInterface | EnemyInte
 
   return parseInt(Math.max(damage, 1).toFixed(0));
 }
+
+// Calculates the honor earned and lost using Elo system.
+export function calculateHonor(attacker: CharacterInterface, defender: CharacterInterface) {
+  const K = 40;
+  const expectedResult = 1 / (1 + 10 ** ((defender.honor - attacker.honor) / 400));
+
+  const earnedAndLostHonor = K * (1 - expectedResult);
+
+  return parseInt(earnedAndLostHonor.toFixed(0));
+}

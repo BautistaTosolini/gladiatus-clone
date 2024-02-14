@@ -58,7 +58,11 @@ const characterSchema = new mongoose.Schema({
   battleReport: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'BattleReport',
-  }
+  },
+  honor: {
+    type: Number,
+    default: 1000,
+  },
 }, {
   timestamps: true
 });

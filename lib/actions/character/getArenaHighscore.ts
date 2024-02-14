@@ -7,22 +7,11 @@ import { connectToDB } from '@/lib/mongoose';
 import { extractUserId } from '@/lib/utils';
 import { cookies } from 'next/headers';
 
-const statsList = [
-  'strength',
-  'endurance',
-  'agility',
-  'dexterity',
-  'intelligence',
-  'charisma',
-];
-
-export async function trainCharacter(stat: string) {
+export async function getArenaHighscore() {
   const token = cookies().get(COOKIE_NAME);
 
   if (!token) throw new Error('Unathorized');
 
-  if (!statsList.includes(stat)) throw new Error('Stat not found');
-  
   try {
     const userId = extractUserId(token);
 
@@ -36,21 +25,15 @@ export async function trainCharacter(stat: string) {
 
     if (!user || !user.character) throw new Error('Unauthorized');
 
-    const character = user.character;
+    const highcoreArena = await Character
+      .find({ onboarded: true })
+      .sort({ honor: -1 })
+      .limit(100);
 
-    const requiredCrowns = Math.pow(character[stat], 2) + character[stat] + 1;
-
-    if (character.crowns < requiredCrowns) throw new Error('Not enough crowns');
-
-    character.crowns -= requiredCrowns;
-    character[stat]++;
-
-    await character.save();
-
-    return JSON.parse(JSON.stringify(character));
+      return JSON.parse(JSON.stringify(highcoreArena));
 
   } catch (error) {
-    console.log(`${new Date} - Failed to train stat - ${error}`);
+    console.log(`${new Date} - Failed to get highscore - ${error}`);
     throw error;
   }
 }

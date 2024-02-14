@@ -24,7 +24,7 @@ export async function getBattleReport(battleReportId: string) {
         model: Character,
       });
 
-    if (!user) throw new Error('Unauthorized');
+     if (!user || !user.character) throw new Error('Unauthorized');
 
     const battleReport = await BattleReport.findById(battleReportId)
       .populate({
@@ -34,18 +34,18 @@ export async function getBattleReport(battleReportId: string) {
 
     if (!battleReport) throw new Error('Battle report was not found');
       
-    // If defender hasn't "id" field, then is a character and it should populate it.
-    if (!('id' in battleReport.defender)) {
-      battleReport.populate({
-        path: 'defender',
-        model: Character,
-      })
+    // If defender has "_id" field (not "id"), then is a character and it should populate it.
+    const isCharacter = '_id' in battleReport.defender;
+
+    if (isCharacter) {
+      const defender = await Character.findById(battleReport.defender);
+      battleReport.defender = defender;
     }
 
    return JSON.parse(JSON.stringify(battleReport));
 
   } catch (error) {
-    console.log(`${new Date} - Failed to get enemies - ${error}`);
+    console.log(`${new Date} - Failed to get battle report - ${error}`);
     return null;
   }
 }

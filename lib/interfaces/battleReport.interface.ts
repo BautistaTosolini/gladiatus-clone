@@ -25,6 +25,7 @@ export interface BattleReport {
     xp?: number[];
     gender: string;
     power: number;
+    _id?: number;
   };
   result: {
     attackerFinalHealth: number;
@@ -36,8 +37,8 @@ export interface BattleReport {
     crownsDrop: number;
     experienceDrop: number;
     winner: string;
-    honourEarned: number;
-    honourLost: number;
+    honorEarned: number;
+    honorLost: number;
   };
   attacker: CharacterInterface;
 }
@@ -86,12 +87,12 @@ export interface Result {
   winner: string;
   experienceDrop?: number;
   crownsDrop?: number;
-  honourEarned?: number;
-  honourLost?: number;
+  honorEarned?: number;
+  honorLost?: number;
 }
 
 export interface Rival {
   _id: string;
   name: string;
-  honour: number;
+  honor: number;
 }

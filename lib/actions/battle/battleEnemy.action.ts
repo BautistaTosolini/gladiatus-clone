@@ -44,13 +44,11 @@ export async function battleEnemy({ zoneName, enemyName }: BattleEnemyParams) {
         }
       })
 
-    if (!user) throw new Error('Unauthorized');
+    if (!user || !user.character) throw new Error('Unauthorized');
 
     const character = user.character;
 
     const journal = character.journal;
-
-    console.log('OLD Journal:', journal)
 
     const { battleSummary, pickedEnemy } = battleCreature({ character, enemy });
 
@@ -83,7 +81,6 @@ export async function battleEnemy({ zoneName, enemyName }: BattleEnemyParams) {
       journal.zones[zoneName][enemyName].draws++;
     }
 
-    console.log('NEW Journal:', journal)
     await journal.save();
 
      // Create the battle report and if there is already an existing one, delete it.

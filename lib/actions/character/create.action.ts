@@ -27,9 +27,9 @@ export async function createCharacter({ name, gender }: CreateCharacterParams) {
 
     const user = await User.findById(userId);
 
-    if (!user) throw new Error('Unauthorized');
+    if (!user || user.character) throw new Error('Unauthorized');
 
-    const isNameTaken = await Character.findOne({ name: name.toLowerCase().trim() });
+    const isNameTaken = await Character.findOne({ name });
 
     if (isNameTaken) throw new Error('Name is already taken');
 

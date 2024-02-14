@@ -37,7 +37,7 @@ export async function getEnemies(zoneName: string) {
         }
       })
 
-    if (!user) throw new Error('Unauthorized');
+    if (!user || !user.character) throw new Error('Unauthorized');
 
     const character = user.character;
 

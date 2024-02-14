@@ -7,7 +7,6 @@ import FighterCard from '@/components/shared/FighterCard';
 import { getBattleReport } from '@/lib/actions/battle/getBattleReport.action';
 import { authenticateUser } from '@/lib/actions/user/authenticate.action';
 import { redirect } from 'next/navigation';
-import { v4 as uuidv4 } from 'uuid';
 import NoResults from '@/components/shared/NoResults';
 
 const Page = async ({ params }: { params: { id: string } }) => {
@@ -22,17 +21,43 @@ const Page = async ({ params }: { params: { id: string } }) => {
 
   if (!user.character) redirect('/onboarding');
 
+  const currentCharacter = user.character;
+
   if (!battleReport || !attacker || !defender) return <NoResults />;
 
   // If the defender has "id" property (not "_id") it means is an npc enemy, if it doesn't, then its an another player character.
   const isEnemy = 'id' in battleReport.defender
   const battleDate = new Date(battleReport!.createdAt);
 
+  let resultTitle = '';
+  let resultCard = '';
+
+  if (battleReport.result.winner === 'Draw') {
+    resultTitle = 'Draw';
+    resultCard = 'brown-card';
+  }
+  else if (battleReport.result.winner === attacker._id) {
+    resultTitle = `Winner: ${attacker.name}`;
+
+    if (attacker._id === currentCharacter._id) resultCard = 'green-card';
+    else if (defender._id === currentCharacter._id) resultCard = 'red-card';
+    else resultCard = 'brown-card';
+  }
+  else {
+    resultTitle = `Winner: ${defender.name}`;
+
+    if (defender._id === currentCharacter._id) resultCard = 'green-card';
+    else if (attacker._id === currentCharacter._id) resultCard = 'red-card';
+    else resultCard = 'brown-card';
+  }
+
+  if (battleReport.result.winner === currentCharacter._id) resultCard = 'green-card';
+
   return (
     <div className='flex flex-col mb-4 px-4 gap-4'>
       <div className='w-full'>
-        <div className={`w-full text-lg flex items-center justify-center h-12 font-semibold text-cream2 ${battleReport.result.winner === user?.character._id ? 'green-card' : 'red-card'}`}>
-          {battleReport.result.winner === attacker._id ? `Winner: ${attacker.name}` : `Winner: ${defender.name}`}
+        <div className={`w-full text-lg flex items-center justify-center h-12 font-semibold text-cream2 ${resultCard}`}>
+          {resultTitle}
         </div>
       </div>
 
@@ -60,19 +85,19 @@ const Page = async ({ params }: { params: { id: string } }) => {
           {battleReport.result.winner === attacker.name ?
           <>
             <p className='text-sm px-2 py-1 flex items-center gap-1'>
-              <span className='font-semibold'>{attacker.name}</span> earned {battleReport.result.honourEarned} honour. 
+              <span className='font-semibold'>{attacker.name}</span> earned {battleReport.result.honorEarned} honor. 
             </p>
             <p className='text-sm px-2 py-1'>
-              <span className='font-semibold'>{defender.name}</span> has lost {battleReport.result.honourLost * -1} honour.
+              <span className='font-semibold'>{defender.name}</span> has lost {battleReport.result.honorLost * -1} honor.
             </p>
           </>
           :
           <>
             <p className='text-sm px-2 py-1 flex items-center gap-1'>
-              <span className='font-semibold'>{defender.name}</span> earned {battleReport.result.honourEarned} honour. 
+              <span className='font-semibold'>{defender.name}</span> earned {battleReport.result.honorEarned} honor. 
             </p>
             <p className='text-sm px-2 py-1'>
-              <span className='font-semibold'>{attacker.name}</span> has lost {battleReport.result.honourLost * -1} honour.
+              <span className='font-semibold'>{attacker.name}</span> has lost {battleReport.result.honorLost * -1} honor.
             </p>
           </>
           }

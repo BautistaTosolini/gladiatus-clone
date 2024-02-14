@@ -10,8 +10,8 @@ const battleReportSchema = new mongoose.Schema({
       defenderTotalDamage: Number,
       attackerHealth: Number,
       defenderHealth: Number,
-      honourEarned: Number,
-      honourLost: Number,
+      honorEarned: Number,
+      honorLost: Number,
       experienceDrop: Number,
       crownsDrop: Number,
     }
@@ -38,7 +38,13 @@ const battleReportSchema = new mongoose.Schema({
   attacker: {
     type: mongoose.Types.ObjectId,
     ref: 'Character',
-  }
+  },
+  honorEarned: {
+    type: Number,
+  },
+  honorLost: {
+    type: Number,
+  },
 }, {
   timestamps: true
 });
