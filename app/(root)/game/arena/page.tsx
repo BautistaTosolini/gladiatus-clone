@@ -1,11 +1,11 @@
 import { redirect } from 'next/navigation';
 import ArenaHeader from '@/components/shared/ArenaHeader';
 import ArenaContent from '@/components/shared/ArenaContent';
-import { authenticateUser } from '@/lib/actions/user/authenticate.action';
+import { getUser } from '@/lib/actions/user/getUser.action';
 import { getArenaRivals } from '@/lib/actions/battle/getArenaRivals.action';
 
 const Page = async () => {
-  const user = await authenticateUser().catch(() => redirect('/'));
+  const user = await getUser().catch(() => redirect('/'));
   const arenaRivals = await getArenaRivals();
   const character = user.character;
 

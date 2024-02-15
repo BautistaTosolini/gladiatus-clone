@@ -5,6 +5,7 @@ import Character from '@/lib/models/character.model';
 import User from '@/lib/models/user.model';
 import { connectToDB } from '@/lib/mongoose';
 import { extractUserId } from '@/lib/utils';
+import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 
 const statsList = [
@@ -21,7 +22,7 @@ export async function trainCharacter(stat: string) {
 
   if (!token) throw new Error('Unathorized');
 
-  if (!statsList.includes(stat)) throw new Error('Stat not found');
+  if (!statsList.includes(stat)) return { error: { message: 'Stat not found' } };
   
   try {
     const userId = extractUserId(token);
@@ -40,13 +41,14 @@ export async function trainCharacter(stat: string) {
 
     const requiredCrowns = Math.pow(character[stat], 2) + character[stat] + 1;
 
-    if (character.crowns < requiredCrowns) throw new Error('Not enough crowns');
+    if (character.crowns < requiredCrowns) return { error: { message: 'Not enough crowns' } };
 
     character.crowns -= requiredCrowns;
     character[stat]++;
 
     await character.save();
 
+    revalidatePath('/game/training');
     return JSON.parse(JSON.stringify(character));
 
   } catch (error) {

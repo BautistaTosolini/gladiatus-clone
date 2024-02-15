@@ -4,25 +4,16 @@ import Image from 'next/image';
 import DescriptionCard from '@/components/shared/DescriptionCard';
 import { CharacterInterface } from '@/lib/interfaces/character.interface';
 import TrainStat from '@/components/shared/TrainStat';
-import { useState } from 'react';
 import { trainCharacter } from '@/lib/actions/character/train.action';
 import toast from 'react-hot-toast';
 
 const calculateStatCost = (stat: number) => Math.pow(stat, 2) + stat + 1;
 
 const TrainingContent = ({ character }: { character: CharacterInterface }) => {
-  const [characterInfo, setCharacterInfo] = useState(character);
-  const [characterCrowns, setCharacterCrowns] = useState(character.crowns);
-
   const handleClick = async (stat: string) => {
-    await trainCharacter(stat)
-      .then((updatedCharacter) => {
-        setCharacterInfo(updatedCharacter);
-        setCharacterCrowns(updatedCharacter.crowns);
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      })
+    const response = await trainCharacter(stat);
+
+    if (response!.error) return toast.error(response.error.message);
   }
 
   return (
@@ -41,7 +32,7 @@ const TrainingContent = ({ character }: { character: CharacterInterface }) => {
             Within the city&apos;s barracks, you can observe robust soldiers training, who are willing to impart their skills in exchange for a generous sum of crowns.
           </p>
           <div className='flex items-center gap-1'>
-            Your balance: {characterCrowns} 
+            Your balance: {character.crowns} 
             <Image 
               src={'/images/crowns.png'}
               width={12}
@@ -54,50 +45,50 @@ const TrainingContent = ({ character }: { character: CharacterInterface }) => {
       <div className='brown-card flex flex-col text-sm rounded-sm'>
         <TrainStat 
           statName='Strength'
-          statValue={characterInfo.strength}
+          statValue={character.strength}
           handleClick={() => handleClick('strength')}
-          crownsValue={calculateStatCost(characterInfo.strength)}
-          characterCrowns={characterInfo.crowns}
+          crownsValue={calculateStatCost(character.strength)}
+          characterCrowns={character.crowns}
         />
 
         <TrainStat 
           statName='Endurance'
-          statValue={characterInfo.endurance}
+          statValue={character.endurance}
           handleClick={() => handleClick('endurance')}
-          crownsValue={calculateStatCost(characterInfo.endurance)}
-          characterCrowns={characterInfo.crowns}
+          crownsValue={calculateStatCost(character.endurance)}
+          characterCrowns={character.crowns}
         />
 
         <TrainStat 
           statName='Agility'
-          statValue={characterInfo.agility}
+          statValue={character.agility}
           handleClick={() => handleClick('agility')}
-          crownsValue={calculateStatCost(characterInfo.agility)}
-          characterCrowns={characterInfo.crowns}
+          crownsValue={calculateStatCost(character.agility)}
+          characterCrowns={character.crowns}
         />
 
         <TrainStat 
           statName='Dexterity'
-          statValue={characterInfo.dexterity}
+          statValue={character.dexterity}
           handleClick={() => handleClick('dexterity')}
-          crownsValue={calculateStatCost(characterInfo.dexterity)}
-          characterCrowns={characterInfo.crowns}
+          crownsValue={calculateStatCost(character.dexterity)}
+          characterCrowns={character.crowns}
         />
 
         <TrainStat 
           statName='Intelligence'
-          statValue={characterInfo.intelligence}
+          statValue={character.intelligence}
           handleClick={() => handleClick('intelligence')}
-          crownsValue={calculateStatCost(characterInfo.intelligence)}
-          characterCrowns={characterInfo.crowns}
+          crownsValue={calculateStatCost(character.intelligence)}
+          characterCrowns={character.crowns}
         />
 
         <TrainStat 
           statName='Charisma'
-          statValue={characterInfo.charisma}
+          statValue={character.charisma}
           handleClick={() => handleClick('charisma')}
-          crownsValue={calculateStatCost(characterInfo.charisma)}
-          characterCrowns={characterInfo.crowns}
+          crownsValue={calculateStatCost(character.charisma)}
+          characterCrowns={character.crowns}
           last
         />
       </div>

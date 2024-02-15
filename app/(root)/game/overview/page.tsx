@@ -1,9 +1,9 @@
 import CharacterCard from '@/components/shared/CharacterCard';
-import { authenticateUser } from '@/lib/actions/user/authenticate.action';
+import { getUser } from '@/lib/actions/user/getUser.action';
 import { redirect } from 'next/navigation';
 
 const Page = async () => {
-  const user = await authenticateUser().catch(() => redirect('/'));
+  const user = await getUser().catch(() => redirect('/'));
 
   if (!user) return null;
 

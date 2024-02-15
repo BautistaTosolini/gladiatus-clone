@@ -1,10 +1,10 @@
 import HighscoreContent from '@/components/shared/HighscoreContent'
 import { getArenaHighscore } from '@/lib/actions/character/getArenaHighscore'
-import { authenticateUser } from '@/lib/actions/user/authenticate.action'
+import { getUser } from '@/lib/actions/user/getUser.action'
 import { redirect } from 'next/navigation'
 
 const Page = async () => {
-  const user = await authenticateUser().catch(() => redirect('/'));
+  const user = await getUser().catch(() => redirect('/'));
   const arenaHighscore = await getArenaHighscore();
 
   if (!user || !arenaHighscore) return null;

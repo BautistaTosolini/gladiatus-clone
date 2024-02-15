@@ -13,6 +13,7 @@ import BattleReport from '@/lib/models/battleReport.model';
 import { calculateExperience } from '@/lib/utils/characterUtils';
 import { zones } from '@/constants/zones';
 import { zoneEnemies } from '@/constants/enemies';
+import { revalidatePath } from 'next/cache';
 
 interface BattleEnemyParams {
   zoneName: string;
@@ -110,6 +111,7 @@ export async function battleEnemy({ zoneName, enemyName }: BattleEnemyParams) {
 
     await character.save();
 
+    revalidatePath('/game/expeditions');
     return JSON.parse(JSON.stringify(savedBattleReport._id));
 
   } catch (error) {

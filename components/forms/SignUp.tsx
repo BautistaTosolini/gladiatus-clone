@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { SignUpUser } from '@/lib/actions/user/signUp.action';
+import { signUpUser } from '@/lib/actions/user/signUp.action';
 import toast from 'react-hot-toast';
 
 const SignUp = () => {
@@ -19,13 +19,11 @@ const SignUp = () => {
       repeatedPassword: formData.get('repeatedPassword') as string,
     }
 
-    await SignUpUser(payload)
-      .then(() => {
-        router.push('/game/overview');
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
+    const response = await signUpUser(payload);
+
+    if (response!.error) return toast.error(response!.error.message);
+
+    router.push('/game/overview');
   }
 
   return (
@@ -72,7 +70,7 @@ const SignUp = () => {
 
       <div className='flex justify-center gap-4'>
         <Button 
-          className='bg-red text-cream2 font-semibold hover:bg-red2 w-full'
+          className='general-button w-full font-semibold hover:brightness-110 hover:bg-brown text-brown2'
           type='button'
           onClick={() => router.push('/')}
         >
@@ -80,7 +78,7 @@ const SignUp = () => {
         </Button>
         <Button 
           type='submit'
-          className='bg-red text-cream2 font-semibold hover:bg-red2 w-full'
+          className='general-button w-full font-semibold hover:brightness-110 hover:bg-brown text-brown2'
         >
           Send
         </Button>

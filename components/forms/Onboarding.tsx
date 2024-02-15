@@ -22,13 +22,11 @@ const Onboarding = () => {
       name,
     }
 
-    await createCharacter(payload)
-      .then(() => {
-        router.push('/game/overview');
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      })
+    const response = await createCharacter(payload);
+
+    if (response!.error) return toast.error(response!.error.message);
+
+    router.push('/game/overview');
   }
 
   return (

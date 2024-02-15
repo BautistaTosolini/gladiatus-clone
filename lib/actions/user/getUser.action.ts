@@ -9,9 +9,8 @@ import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 
 // extracts the user id from the jwt and returns the user object if it is valid
-export async function authenticateUser() {
+export async function getUser() {
   const token = cookies().get(COOKIE_NAME);
-  const _cookies = cookies()
 
   if (!token) throw new Error('Unathorized');
 

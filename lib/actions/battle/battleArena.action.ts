@@ -10,6 +10,7 @@ import Journal from '@/lib/models/journal.model';
 import { fight } from '@/lib/utils/simulateCombat';
 import BattleReport from '@/lib/models/battleReport.model';
 import { calculateHonor } from '@/lib/utils/battleUtils';
+import { revalidatePath } from 'next/cache';
 
 export async function battleArena(defenderId: string) {
   const token = cookies().get(COOKIE_NAME);
@@ -123,6 +124,7 @@ export async function battleArena(defenderId: string) {
     await defender.save();
     await defenderJournal.save();
 
+    revalidatePath('/game/arena');
     return JSON.parse(JSON.stringify(savedBattleReport._id));
 
   } catch (error) {

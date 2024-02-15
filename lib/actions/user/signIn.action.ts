@@ -13,14 +13,14 @@ interface signInUserParams {
 }
 
 export async function signInUser({ email, password }: signInUserParams) {
-  if (!email || !password) throw new Error('Please complete all the fields');
+  if (!email || !password) return { error: { message: 'All fields must be completed' } };
 
   try {
     connectToDB();
 
     const user = await User.findOne({ email }).select('password _id');
 
-    if (!user) throw new Error(`Invalid E-Mail or password`);
+    if (!user) return { error: { message: 'Invalid E-Mail or password' } };
 
     if (await compare(password, user.password)) {
       const secret = process.env.JWT_SECRET || '';
@@ -36,13 +36,11 @@ export async function signInUser({ email, password }: signInUserParams) {
         path: '/',
       });
 
-      return 'User logged in successfully';
     }
 
-    throw new Error(`Invalid E-Mail or password`);
+    return { error: { message: 'Invalid E-Mail or password' } };
 
   } catch (error) {
     console.log(`${new Date} - Failed to sign in user - ${error}`);
-    throw error;
   }
 }

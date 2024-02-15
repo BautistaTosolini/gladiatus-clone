@@ -5,12 +5,12 @@ import { BattleReport } from '@/lib/interfaces/battleReport.interface';
 import DescriptionCard from '@/components/shared/DescriptionCard';
 import FighterCard from '@/components/shared/FighterCard';
 import { getBattleReport } from '@/lib/actions/battle/getBattleReport.action';
-import { authenticateUser } from '@/lib/actions/user/authenticate.action';
+import { getUser } from '@/lib/actions/user/getUser.action';
 import { redirect } from 'next/navigation';
 import NoResults from '@/components/shared/NoResults';
 
 const Page = async ({ params }: { params: { id: string } }) => {
-  const user = await authenticateUser().catch(() => redirect('/'));
+  const user = await getUser().catch(() => redirect('/'));
   const battleReportId = params.id;
   const battleReport = await getBattleReport(battleReportId) as BattleReport;
 

@@ -14,7 +14,7 @@ interface CreateCharacterParams {
 }
 
 export async function createCharacter({ name, gender }: CreateCharacterParams) {
-  if (name.length < 3) throw new Error('Your name should be at least 3 characters');
+  if (name.length < 3) return { error: { message: 'Name should be at least 3 characters' } };
 
   const token = cookies().get(COOKIE_NAME);
 
@@ -31,7 +31,7 @@ export async function createCharacter({ name, gender }: CreateCharacterParams) {
 
     const isNameTaken = await Character.findOne({ name });
 
-    if (isNameTaken) throw new Error('Name is already taken');
+    if (isNameTaken) return { error: { message: 'Name is already taken' } };
 
     const character = await Character.create({
       name,
@@ -48,8 +48,6 @@ export async function createCharacter({ name, gender }: CreateCharacterParams) {
 
     user.character = character._id;
     await user.save();
-
-    return 'Character created successfully';
 
   } catch (error) {
     console.log(`${new Date} - Failed to create character - ${error}`);

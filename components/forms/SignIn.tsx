@@ -17,13 +17,11 @@ const SignIn = () => {
       password: formData.get('password') as string,
     }
 
-    await signInUser(payload)
-      .then(() => {
-        router.push('/game/overview');
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
+    const response = await signInUser(payload);
+
+    if (response!.error) return toast.error(response!.error.message);
+
+    router.push('/game/overview');
   }
 
   return (
@@ -50,7 +48,7 @@ const SignIn = () => {
 
       <div className='flex justify-center gap-4'>
         <Button 
-          className='bg-red text-cream2 font-semibold hover:bg-red2 w-full'
+          className='general-button w-full font-semibold hover:brightness-110 hover:bg-brown text-brown2'
           type='button'
           onClick={() => router.push('/')}
         >
@@ -58,7 +56,7 @@ const SignIn = () => {
         </Button>
         <Button 
           type='submit'
-          className='bg-red text-cream2 font-semibold hover:bg-red2 w-full'
+          className='general-button w-full font-semibold hover:brightness-110 hover:bg-brown text-brown2'
         >
           Send
         </Button>

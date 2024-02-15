@@ -21,13 +21,11 @@ const ArenaContent = ({ arenaRivals, character }: ArenaContentProps) => {
   const router = useRouter();
 
   const handleClick = async (rivalId: string) => {
-    await battleArena(rivalId)
-      .then((battleReportId) => {
-        router.push(`/game/battle/${battleReportId}`);
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      })
+    const response = await battleArena(rivalId);
+
+    if (response!.error) return toast.error(response.error.message);
+
+    router.push(`/game/battle/${response}`);
   }
 
   return (
