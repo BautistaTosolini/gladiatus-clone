@@ -38,6 +38,8 @@ export async function getBattleReport(battleReportId: string) {
     const isCharacter = '_id' in battleReport.defender;
 
     if (isCharacter) {
+      // For some reason populate method doesn't work, there might be some error in the "battleReport" schema but i couldn't figure out. 
+      // This way it's a little bit sketchy but it works.
       const defender = await Character.findById(battleReport.defender);
       battleReport.defender = defender;
     }

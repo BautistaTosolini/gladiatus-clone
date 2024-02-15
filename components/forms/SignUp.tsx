@@ -24,8 +24,7 @@ const SignUp = () => {
         router.push('/game/overview');
       })
       .catch((error) => {
-        console.log(error)
-        toast.error(error.message)
+        toast.error(error.message);
       });
   }
 
