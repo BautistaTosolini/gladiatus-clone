@@ -24,7 +24,7 @@ const battleReportSchema = new mongoose.Schema({
       events: [String],
     }]
   },
-  zone: {
+  expedition: {
     type: String,
   },
   defender: {

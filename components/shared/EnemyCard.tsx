@@ -10,16 +10,16 @@ import { useRouter } from 'next/navigation';
 
 interface EnemyCardProps {
   enemy: EnemyStatsInterface;
-  zone: string;
+  expedition: string;
 }
 
-const EnemyCard = ({ enemy, zone }: EnemyCardProps) => {
+const EnemyCard = ({ enemy, expedition }: EnemyCardProps) => {
   const router = useRouter();
   
   const handleClick = async () => {
-    const response = await battleEnemy({ enemyName: enemy.image, zoneName: zone });
+    const response = await battleEnemy({ enemyName: enemy.image, expeditionName: expedition });
 
-    if (response && 'error' in response) return toast.error(response!.error.message);
+    if (response && response.error) return toast.error(response.error.message);
 
     router.push(`/game/battle/${response}`);
   }
@@ -33,7 +33,7 @@ const EnemyCard = ({ enemy, zone }: EnemyCardProps) => {
           <HoverCard closeDelay={0}>
             <HoverCardTrigger asChild>
               <Image 
-                src={`/enemies/${zone}/${enemy.image}.jpg`}
+                src={`/enemies/${expedition}/${enemy.image}.jpg`}
                 width={135}
                 height={156}
                 alt={enemy.image}

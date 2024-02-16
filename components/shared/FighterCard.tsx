@@ -19,11 +19,11 @@ interface FighterCardProps {
   charisma: number;
   image: string;
   isEnemy?: boolean;
-  zone?: string;
+  expedition?: string;
   power: number;
 }
 
-const FighterCard = ({ name, level, strength, endurance, dexterity, agility, intelligence, charisma, power, image, zone, isEnemy = false }: FighterCardProps) => {
+const FighterCard = ({ name, level, strength, endurance, dexterity, agility, intelligence, charisma, power, image, expedition, isEnemy = false }: FighterCardProps) => {
   return (
     <div className='flex flex-col w-[168px] gap-3 items-center'>
       <h2 className='font-semibold text-md red-card flex justify-center items-center text-cream2 h-10 px-4 w-full drop-shadow-xl truncate'>
@@ -31,7 +31,7 @@ const FighterCard = ({ name, level, strength, endurance, dexterity, agility, int
       </h2>
       <Image 
         className='drop-shadow-xl'
-        src={isEnemy ? `/enemies/${zone}/${image}.jpg` : `/characters/${image}/character-lvl${roundDownToNearestMultipleOf10(level)}.jpg`}
+        src={isEnemy ? `/enemies/${expedition}/${image}.jpg` : `/characters/${image}/character-lvl${roundDownToNearestMultipleOf10(level)}.jpg`}
         width={168}
         height={194}
         alt='character'

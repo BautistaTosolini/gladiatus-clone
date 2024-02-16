@@ -3,7 +3,7 @@ import { EnemyInterface, EnemyStatsInterface } from '@/lib/interfaces/enemy.inte
 
 export interface BattleReport {
   createdAt: string;
-  zone: string;
+  expedition: string;
   rounds: [
       {
         attackerHP: number;

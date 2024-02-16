@@ -1,17 +1,17 @@
-interface ZoneInfo {
+interface ExpeditionInfo {
   name: string;
   id: string;
   description: string;
 }
 
-interface Zones {
-  grimwood: ZoneInfo,
-  bandit: ZoneInfo,
-  crypt: ZoneInfo,
-  [key: string]: ZoneInfo;
+interface Expeditions {
+  grimwood: ExpeditionInfo,
+  bandit: ExpeditionInfo,
+  crypt: ExpeditionInfo,
+  [key: string]: ExpeditionInfo;
 }
 
-export const zones: Zones = {
+export const expeditions: Expeditions = {
   grimwood: {
     name: 'Grimwood',
     id: 'grimwood',

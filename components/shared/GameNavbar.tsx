@@ -5,9 +5,9 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
 import { logOutUser } from '@/lib/actions/user/logOut.action';
 import { LogOut, Settings, User } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
-const Navbar = () => {
+const GameNavbar = () => {
   const pathname = usePathname();
 
   const logOut = async () => {
@@ -65,4 +65,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+export default GameNavbar;

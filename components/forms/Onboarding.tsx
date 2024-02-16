@@ -24,7 +24,7 @@ const Onboarding = () => {
 
     const response = await createCharacter(payload);
 
-    if (response && 'error' in response) return toast.error(response!.error.message);
+    if (response && response.error) return toast.error(response.error.message);
 
     router.push('/game/overview');
   }

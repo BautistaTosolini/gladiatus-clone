@@ -1,3 +1,4 @@
+import LandingNavbar from '@/components/shared/LandingNavbar';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
@@ -17,6 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <body className={inter.className}>
+      <LandingNavbar />
       <div className='w-full flex justify-center items-center min-h-screen bg-cover' style={{ backgroundImage: 'url("/images/landing-page-image.jpg")' }}>
         <Toaster
           toastOptions={{

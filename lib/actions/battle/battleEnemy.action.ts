@@ -11,24 +11,24 @@ import { battleCreature } from '@/lib/utils/simulateCombat';
 import { randomBoolean } from '@/lib/utils/randomUtils';
 import BattleReport from '@/lib/models/battleReport.model';
 import { calculateExperience } from '@/lib/utils/characterUtils';
-import { zones } from '@/constants/zones';
-import { zoneEnemies } from '@/constants/enemies';
+import { expeditions } from '@/constants/expeditions';
+import { expeditionEnemies } from '@/constants/enemies';
 import { revalidatePath } from 'next/cache';
 
 interface BattleEnemyParams {
-  zoneName: string;
+  expeditionName: string;
   enemyName: string;
 }
 
-export async function battleEnemy({ zoneName, enemyName }: BattleEnemyParams) {
+export async function battleEnemy({ expeditionName, enemyName }: BattleEnemyParams) {
   const token = cookies().get(COOKIE_NAME);
 
   if (!token) throw new Error('Unathorized');
 
-  if (!zones.hasOwnProperty(zoneName)) throw new Error('Zone not found');
+  if (!expeditions.hasOwnProperty(expeditionName)) throw new Error('Expedition not found');
 
   // Pick the enemy object from the list.
-  const enemy = zoneEnemies[zoneName][enemyName];
+  const enemy = expeditionEnemies[expeditionName][enemyName];
 
   try {
     const userId = extractUserId(token);
@@ -53,18 +53,18 @@ export async function battleEnemy({ zoneName, enemyName }: BattleEnemyParams) {
 
     const { battleSummary, pickedEnemy } = battleCreature({ character, enemy });
 
-    journal.zones[zoneName][enemyName].battles++;
+    journal.expeditions[expeditionName][enemyName].battles++;
 
     // If the character won.
     if (battleSummary.result.winner === character._id) {
       journal.world.battles++;
       journal.world.wins++;
       journal.world.crownsEarned += battleSummary.result.crownsDrop;
-      journal.zones[zoneName][enemyName].wins++;
+      journal.expeditions[expeditionName][enemyName].wins++;
 
       // Calculate probability of obtaining knowledge only if knowledge is not greater than 3.
-      if (journal.zones[zoneName][enemyName].knowledge < 3 && randomBoolean(30)) {
-        journal.zones[zoneName][enemyName].knowledge++;
+      if (journal.expeditions[expeditionName][enemyName].knowledge < 3 && randomBoolean(30)) {
+        journal.expeditions[expeditionName][enemyName].knowledge++;
       }
     }
 
@@ -72,14 +72,14 @@ export async function battleEnemy({ zoneName, enemyName }: BattleEnemyParams) {
     if (battleSummary.result.winner === pickedEnemy.id.toString()) {
       journal.world.battles++;
       journal.world.defeats++;
-      journal.zones[zoneName][enemyName].defeats++;
+      journal.expeditions[expeditionName][enemyName].defeats++;
     }
 
     // If it's a draw.
     if (battleSummary.result.winner === 'Draw') {
       journal.world.battles++;
       journal.world.draws++;
-      journal.zones[zoneName][enemyName].draws++;
+      journal.expeditions[expeditionName][enemyName].draws++;
     }
 
     await journal.save();
@@ -88,7 +88,7 @@ export async function battleEnemy({ zoneName, enemyName }: BattleEnemyParams) {
      const savedBattleReport = await BattleReport.create({
       result: battleSummary.result,
       rounds: battleSummary.rounds,
-      zone: zoneName,
+      expedition: expeditionName,
       defender: pickedEnemy,
       attacker: character._id,
     });

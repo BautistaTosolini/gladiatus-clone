@@ -139,7 +139,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
           intelligence={defender.intelligence}
           charisma={defender.charisma}
           power={defender.power}
-          zone={battleReport.zone}
+          expedition={battleReport.expedition}
           isEnemy={isEnemy}
         />
       </div>

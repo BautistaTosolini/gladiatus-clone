@@ -1,6 +1,6 @@
 import { EnemyStatsInterface } from "@/lib/interfaces/enemy.interface";
 
-interface ZoneEnemies {
+interface ExpeditionEnemies {
   grimwood: {
     rat: EnemyStatsInterface;
     lynx: EnemyStatsInterface;
@@ -22,7 +22,7 @@ interface ZoneEnemies {
   [key: string]: any;
 }
 
-export const zoneEnemies: ZoneEnemies = {
+export const expeditionEnemies: ExpeditionEnemies = {
   grimwood: {
     rat: {
       name: 'Rat',

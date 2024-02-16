@@ -6,19 +6,19 @@ import User from '@/lib/models/user.model';
 import { connectToDB } from '@/lib/mongoose';
 import { extractUserId } from '@/lib/utils';
 import { cookies } from 'next/headers';
-import { zoneEnemies } from '@/constants/enemies';
+import { expeditionEnemies } from '@/constants/enemies';
 import { EnemyStatsInterface } from '@/lib/interfaces/enemy.interface';
 import Journal from '@/lib/models/journal.model';
-import { zones } from '@/constants/zones';
+import { expeditions } from '@/constants/expeditions';
 
-export async function getEnemies(zoneName: string) {
+export async function getExpeditionEnemies(expeditionName: string) {
   const token = cookies().get(COOKIE_NAME);
 
   if (!token) throw new Error('Unathorized');
 
-  if (!zones.hasOwnProperty(zoneName)) return null;
+  if (!expeditions.hasOwnProperty(expeditionName)) return null;
 
-  const zone = zoneEnemies[zoneName];
+  const expedition = expeditionEnemies[expeditionName];
 
   const enemiesInfo = [];
 
@@ -42,11 +42,11 @@ export async function getEnemies(zoneName: string) {
     const character = user.character;
 
     // Checks the character's knowledge of each enemy in the area and returns the knowledge he has.
-    for (const enemyName in zone) {
-      if (zone.hasOwnProperty(enemyName)) {
-        const enemy = zone[enemyName];
+    for (const enemyName in expedition) {
+      if (expedition.hasOwnProperty(enemyName)) {
+        const enemy = expedition[enemyName];
 
-        const enemyKnowledge = character.journal.zones[zoneName][enemyName]?.knowledge || 0;
+        const enemyKnowledge = character.journal.expeditions[expeditionName][enemyName]?.knowledge || 0;
 
         const enemyInfo: EnemyStatsInterface = {
           name: enemy.name,

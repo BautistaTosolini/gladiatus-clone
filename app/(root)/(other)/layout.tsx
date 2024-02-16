@@ -1,6 +1,6 @@
 import { Inter } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
-import Navbar from '@/components/shared/Navbar';
+import GameNavbar from '@/components/shared/GameNavbar';
 import NavigationBanner from '@/components/shared/NavigationBanner';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             }
           }}
         />
-        <Navbar />
+        <GameNavbar />
         <div className='w-full h-min-full flex flex-row justify-center gap-6'>
           <NavigationBanner />
           <div className='flex flex-col items-center h-min-full'>

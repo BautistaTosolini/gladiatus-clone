@@ -1,41 +1,41 @@
 import EnemyCard from '@/components/shared/EnemyCard';
 import DescriptionCard from '@/components/shared/DescriptionCard';
-import { getEnemies } from '@/lib/actions/battle/getEnemies.action';
+import { getExpeditionEnemies } from '@/lib/actions/battle/getExpeditionEnemies.action';
 import { getUser } from '@/lib/actions/user/getUser.action';
 import { redirect } from 'next/navigation';
-import { zones } from '@/constants/zones';
+import { expeditions } from '@/constants/expeditions';
 import NoResults from '@/components/shared/NoResults';
 
 const Page = async ({ params }: { params: { expedition: string } }) => {
   const user = await getUser().catch(() => redirect('/'));
-  const zoneName = params.expedition;
-  const enemies = await getEnemies(zoneName);
+  const expeditionName = params.expedition;
+  const enemies = await getExpeditionEnemies(expeditionName);
 
   if (!user.character) redirect('/onboarding');
 
-  const zoneInfo = zones[zoneName];
+  const expeditionInfo = expeditions[expeditionName];
 
   if (!enemies) return <NoResults />;
 
   return (
     <div className='px-4 flex flex-col gap-4'>
       <h1 className='text-xl font-bold border-b-[3px] border-brown2 text-center text-brown2'>
-        {zoneInfo.name}
+        {expeditionInfo.name}
       </h1>
       <div className='flex flex-row gap-4'>
         {enemies.map((enemy) => (
           <EnemyCard
             key={enemy.id}
             enemy={enemy}
-            zone={zoneName}
+            expedition={expeditionName}
           />
           ))}
       </div>
       <div>
         <DescriptionCard
-          title='Zone description'
+          title='Expedition description'
         >
-          {zoneInfo.description}
+          {expeditionInfo.description}
         </DescriptionCard>
       </div>
     </div>

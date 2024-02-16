@@ -45,7 +45,7 @@ const journalSchema = new mongoose.Schema({
       crownsEarned: 0,
     },
   },
-  zones: {
+  expeditions: {
     type: {
       grimwood: {
         rat: {

@@ -33,7 +33,7 @@ export interface EnemyStatsInterface {
   power?: number;
 }
 
-export type Zones = {
+export type Expeditions = {
   [key: string]: {
     [key: string]: EnemyInterface;
   };
