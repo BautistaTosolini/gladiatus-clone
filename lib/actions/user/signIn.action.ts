@@ -36,6 +36,7 @@ export async function signInUser({ email, password }: signInUserParams) {
         path: '/',
       });
 
+      return { message: 'User created' };
     }
 
     return { error: { message: 'Invalid E-Mail or password' } };

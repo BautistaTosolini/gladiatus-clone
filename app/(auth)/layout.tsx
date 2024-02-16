@@ -16,20 +16,18 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang='en'>
-      <body className={inter.className}>
-        <div className='w-full flex justify-center items-center min-h-screen bg-cover' style={{ backgroundImage: 'url("/images/landing-page-image.jpg")' }}>
-          <Toaster
-            toastOptions={{
-              className: '',
-              style: {
-                background: '#eed7a1'
-              }
-            }}
-          />
-          {children}
-        </div>
-      </body>
-    </html>
+    <body className={inter.className}>
+      <div className='w-full flex justify-center items-center min-h-screen bg-cover' style={{ backgroundImage: 'url("/images/landing-page-image.jpg")' }}>
+        <Toaster
+          toastOptions={{
+            className: '',
+            style: {
+              background: '#eed7a1'
+            }
+          }}
+        />
+        {children}
+      </div>
+    </body>
   )
 }

@@ -19,7 +19,7 @@ const EnemyCard = ({ enemy, zone }: EnemyCardProps) => {
   const handleClick = async () => {
     const response = await battleEnemy({ enemyName: enemy.image, zoneName: zone });
 
-    if (response!.error) return toast.error(response.error.message);
+    if (response && 'error' in response) return toast.error(response!.error.message);
 
     router.push(`/game/battle/${response}`);
   }

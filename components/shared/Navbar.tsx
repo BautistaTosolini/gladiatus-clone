@@ -2,15 +2,16 @@
 
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { logOutUser } from '@/lib/actions/user/logOut.action';
 import { LogOut, Settings, User } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 const Navbar = () => {
   const pathname = usePathname();
 
   const logOut = async () => {
-
+    await logOutUser();
   }
 
   return (

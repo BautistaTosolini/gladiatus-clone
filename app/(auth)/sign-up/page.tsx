@@ -1,7 +1,13 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import SignUp from '@/components/forms/SignUp';
+import { getUser } from '@/lib/actions/user/getUser.action';
+import { redirect } from 'next/navigation';
 
-const Page = () => {
+const Page = async () => {
+  const user = await getUser().catch(() => {});
+
+  if (user) redirect('/game/overview');
+
   return (
     <Card className='w-[350px] rounded-sm cream-card'>
       <CardHeader>

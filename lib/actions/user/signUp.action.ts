@@ -58,6 +58,8 @@ export async function signUpUser({ name, email, password, repeatedPassword }: Si
       path: '/',
     });
 
+    return { message: 'User signed in' };
+
   } catch (error: any) {
     console.log(`${new Date} - Failed to sign up user - ${error}`);
   }

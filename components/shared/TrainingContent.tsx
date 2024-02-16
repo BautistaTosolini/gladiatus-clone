@@ -13,7 +13,7 @@ const TrainingContent = ({ character }: { character: CharacterInterface }) => {
   const handleClick = async (stat: string) => {
     const response = await trainCharacter(stat);
 
-    if (response!.error) return toast.error(response.error.message);
+    if (response && 'error' in response) return toast.error(response!.error.message);
   }
 
   return (
