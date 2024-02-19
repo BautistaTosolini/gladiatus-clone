@@ -26,7 +26,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
   if (!battleReport || !attacker || !defender) return <NoResults />;
 
   // If the defender has "id" property (not "_id") it means is an npc enemy, if it doesn't, then its an another player character.
-  const isEnemy = 'id' in battleReport.defender
+  const isNpc = 'id' in battleReport.defender
   const battleDate = new Date(battleReport!.createdAt);
 
   let resultTitle = '';
@@ -61,7 +61,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
         </div>
       </div>
 
-      {isEnemy ? 
+      {isNpc ? 
         <DescriptionCard
         title='Rewards'
         >
@@ -129,7 +129,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
         </div>
 
         <FighterCard
-          image={isEnemy ? defender.image : defender.gender} 
+          image={isNpc ? defender.image : defender.gender} 
           level={defender.level}
           name={defender.name}
           strength={defender.strength}
@@ -138,9 +138,9 @@ const Page = async ({ params }: { params: { id: string } }) => {
           dexterity={defender.dexterity}
           intelligence={defender.intelligence}
           charisma={defender.charisma}
-          power={defender.power}
+          power={isNpc ? defender.power : calculatePower(defender)}
           expedition={battleReport.expedition}
-          isEnemy={isEnemy}
+          isEnemy={isNpc}
         />
       </div>
 
