@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 import { createCharacter } from '@/lib/actions/character/create.action';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import DescriptionCard from '@/components/shared/DescriptionCard';
+import DescriptionCard from '@/components/cards/DescriptionCard';
 
 const Onboarding = () => {
   const router = useRouter();

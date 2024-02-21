@@ -35,11 +35,11 @@ const TrainStat = ({ statName, statValue, characterCrowns, handleClick, crownsVa
           onClick={canTrain ? handleClick : () => {}}
         >
           <Image
-            src={`${canTrain ? '/images/train-stat.jpg' : '/images/train-stat-bw.jpg'}`}
+            src='/images/train-stat.jpg'
             width={25}
             height={25}
             alt='train'
-            className='shadow-sm'
+            className={`shadow-sm ${!canTrain && 'grayscale'}`}
           />
         </div>
       </div>

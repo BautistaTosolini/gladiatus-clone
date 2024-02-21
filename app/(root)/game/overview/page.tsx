@@ -1,4 +1,4 @@
-import CharacterCard from '@/components/shared/CharacterCard';
+import CharacterCard from '@/components/cards/CharacterCard';
 import { getUser } from '@/lib/actions/user/getUser.action';
 import { redirect } from 'next/navigation';
 

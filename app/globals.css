@@ -99,6 +99,10 @@
 	}
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
 .main-container {
   overflow-y: scroll;
   position: relative;
@@ -187,4 +191,19 @@
 .background-main-image {
   background: #191513 url("/images/bg-image.jpg") no-repeat scroll 10% 40px;
   background-size: 100%;
+}
+
+.progress-percent {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+}
+
+.progressbar{
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	height: 18px;
+  border-radius: 2px;
 }

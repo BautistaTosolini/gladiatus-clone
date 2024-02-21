@@ -11,9 +11,10 @@ import { useRouter } from 'next/navigation';
 interface EnemyCardProps {
   enemy: EnemyStatsInterface;
   expedition: string;
+  canFight: boolean;
 }
 
-const EnemyCard = ({ enemy, expedition }: EnemyCardProps) => {
+const EnemyCard = ({ enemy, expedition, canFight }: EnemyCardProps) => {
   const router = useRouter();
   
   const handleClick = async () => {
@@ -114,8 +115,8 @@ const EnemyCard = ({ enemy, expedition }: EnemyCardProps) => {
           </HoverCard>
         </div>
         <Button
-          className='general-button w-full h-7 font-semibold hover:brightness-110 hover:bg-brown text-brown2'
-          onClick={handleClick}
+          className={`general-button w-full h-7 font-semibold text-brown2 hover:bg-brown ${canFight ? 'hover:brightness-110' : 'grayscale cursor-default'}`}
+          onClick={canFight ? handleClick : () => {}}
         >
           Fight
         </Button>
@@ -123,4 +124,4 @@ const EnemyCard = ({ enemy, expedition }: EnemyCardProps) => {
   )
 }
 
-export default EnemyCard
+export default EnemyCard;

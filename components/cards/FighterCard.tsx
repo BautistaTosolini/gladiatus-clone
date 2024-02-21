@@ -65,7 +65,7 @@ const FighterCard = ({ name, level, strength, endurance, dexterity, agility, int
 
         <div className='border-cream2 px-2'>
           <div className='flex justify-between text-sm'>
-            Total Power:
+            Power Rank:
             <span className='flex justify-center items-center font-semibold gap-2 text-red3'>
               {power}
             </span>

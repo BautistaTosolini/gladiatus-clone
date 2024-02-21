@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image';
-import DescriptionCard from '@/components/shared/DescriptionCard';
+import DescriptionCard from '@/components/cards/DescriptionCard';
 import { CharacterInterface } from '@/lib/interfaces/character.interface';
 import TrainStat from '@/components/shared/TrainStat';
 import { trainCharacter } from '@/lib/actions/character/train.action';

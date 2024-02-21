@@ -4,7 +4,7 @@ import { COOKIE_NAME } from '@/constants';
 import Character from '@/lib/models/character.model';
 import User from '@/lib/models/user.model';
 import { connectToDB } from '@/lib/mongoose';
-import { extractUserId } from '@/lib/utils';
+import { canFight, extractUserId } from '@/lib/utils';
 import { cookies } from 'next/headers';
 import Journal from '@/lib/models/journal.model';
 import { fight } from '@/lib/utils/simulateCombat';
@@ -33,6 +33,8 @@ export async function battleArena(defenderId: string) {
       })
 
     if (!user || !user.character) throw new Error('Unauthorized');
+
+    if (!canFight({ time: user.character.arenaLastBattle, fight: 'arena' })) return { error: { message: `Arena cooldown didn't finished` } }
 
     const attacker = user.character;
 
@@ -113,6 +115,8 @@ export async function battleArena(defenderId: string) {
     defenderJournal.arena.damageReceived += result.attackerTotalDamage;
 
     const savedBattleReport = await BattleReport.create(battleReport);
+
+    attacker.arenaLastBattle = new Date();
 
     if (attacker.honor < 0) attacker.honor = 0;
     attacker.battleReport = savedBattleReport._id;

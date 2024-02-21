@@ -1,10 +1,12 @@
 'use client'
 
-import DescriptionCard from '@/components/shared/DescriptionCard';
+import DescriptionCard from '@/components/cards/DescriptionCard';
 import { battleArena } from '@/lib/actions/battle/battleArena.action';
 import { CharacterInterface } from '@/lib/interfaces/character.interface';
+import { canFight } from '@/lib/utils';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 interface ArenaContentProps {
@@ -18,6 +20,7 @@ interface ArenaContentProps {
 }
 
 const ArenaContent = ({ arenaRivals, character }: ArenaContentProps) => {
+  const [canCharacterFight, setCanCharacterFight] = useState(canFight({ time: new Date(character.arenaLastBattle).getTime(), fight: 'arena' }));
   const router = useRouter();
 
   const handleClick = async (rivalId: string) => {
@@ -27,6 +30,19 @@ const ArenaContent = ({ arenaRivals, character }: ArenaContentProps) => {
 
     router.push(`/game/battle/${response}`);
   }
+
+  // Verify if the character can fight every second.
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      const canCharacterFight = canFight({ time: new Date(character.arenaLastBattle).getTime(), fight: 'arena' });
+      if (canCharacterFight) {
+        setCanCharacterFight(true);
+        clearInterval(interval);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>
@@ -73,7 +89,8 @@ const ArenaContent = ({ arenaRivals, character }: ArenaContentProps) => {
                         height={22}
                         alt='fight'
                         key={`${rival._id}-${rival.name}`}
-                        onClick={() => handleClick(rival._id)}
+                        onClick={canCharacterFight ? () => handleClick(rival._id) : () => {}}
+                        className={canCharacterFight ? '' : 'cursor-not-allowed grayscale'}
                       />
                     </div> 
                   }

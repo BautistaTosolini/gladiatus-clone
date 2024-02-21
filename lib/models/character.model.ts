@@ -63,6 +63,14 @@ const characterSchema = new mongoose.Schema({
     type: Number,
     default: 1000,
   },
+  expeditionLastBattle: {
+    type: Date,
+    default: new Date(Date.now() - 10 * 60 * 1000),
+  },
+  arenaLastBattle: {
+    type: Date,
+    default: new Date(Date.now() - 10 * 60 * 1000),
+  }
 }, {
   timestamps: true
 });

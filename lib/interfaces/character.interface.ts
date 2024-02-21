@@ -20,4 +20,6 @@ export interface CharacterInterface {
   power: number;
   battleReport: BattleReport;
   [key: string]: any;
+  expeditionLastBattle: Date,
+  arenaLastBattle: Date,
 }

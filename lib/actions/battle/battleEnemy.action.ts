@@ -4,7 +4,7 @@ import { COOKIE_NAME } from '@/constants';
 import Character from '@/lib/models/character.model';
 import User from '@/lib/models/user.model';
 import { connectToDB } from '@/lib/mongoose';
-import { extractUserId } from '@/lib/utils';
+import { canFight, extractUserId } from '@/lib/utils';
 import { cookies } from 'next/headers';
 import Journal from '@/lib/models/journal.model';
 import { battleCreature } from '@/lib/utils/simulateCombat';
@@ -44,8 +44,10 @@ export async function battleEnemy({ expeditionName, enemyName }: BattleEnemyPara
           model: Journal,
         }
       })
-
+      
     if (!user || !user.character) throw new Error('Unauthorized');
+
+    if (!canFight({ time: user.character.expeditionLastBattle, fight: 'expedition' })) return { error: { message: `Expedition cooldown didn't finished` } }
 
     const character = user.character;
 
@@ -108,6 +110,8 @@ export async function battleEnemy({ expeditionName, enemyName }: BattleEnemyPara
     }
 
     character.crowns += battleSummary.result.crownsDrop;
+
+    character.expeditionLastBattle = new Date();
 
     await character.save();
 

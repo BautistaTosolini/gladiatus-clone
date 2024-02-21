@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import DescriptionCard from '@/components/shared/DescriptionCard';
+import DescriptionCard from '@/components/cards/DescriptionCard';
 
 const ArenaHeader = () => {
   return (

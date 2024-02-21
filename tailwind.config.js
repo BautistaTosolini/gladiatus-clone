@@ -26,6 +26,7 @@ module.exports = {
         gold: "#e6b749",
         brown: "#b59964",
         brown2: "#695220",
+        green: "#003805",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -81,5 +82,7 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+  ],
 }

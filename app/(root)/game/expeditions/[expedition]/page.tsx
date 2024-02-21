@@ -1,10 +1,10 @@
-import EnemyCard from '@/components/shared/EnemyCard';
-import DescriptionCard from '@/components/shared/DescriptionCard';
+import DescriptionCard from '@/components/cards/DescriptionCard';
 import { getExpeditionEnemies } from '@/lib/actions/battle/getExpeditionEnemies.action';
 import { getUser } from '@/lib/actions/user/getUser.action';
 import { redirect } from 'next/navigation';
 import { expeditions } from '@/constants/expeditions';
 import NoResults from '@/components/shared/NoResults';
+import ExpeditionContent from '@/components/shared/ExpeditionContent';
 
 const Page = async ({ params }: { params: { expedition: string } }) => {
   const user = await getUser().catch(() => redirect('/'));
@@ -22,15 +22,11 @@ const Page = async ({ params }: { params: { expedition: string } }) => {
       <h1 className='text-xl font-bold border-b-[3px] border-brown2 text-center text-brown2'>
         {expeditionInfo.name}
       </h1>
-      <div className='flex flex-row gap-4'>
-        {enemies.map((enemy) => (
-          <EnemyCard
-            key={enemy.id}
-            enemy={enemy}
-            expedition={expeditionName}
-          />
-          ))}
-      </div>
+      <ExpeditionContent
+        enemies={enemies}
+        expeditionName={expeditionName}
+        character={user.character}
+      />
       <div>
         <DescriptionCard
           title='Expedition description'
