@@ -3,7 +3,7 @@ import { Toaster } from 'react-hot-toast';
 
 import GameNavbar from '@/components/shared/GameNavbar';
 import NavigationBanner from '@/components/shared/NavigationBanner';
-import GameHeader from '@/components/shared/game-header/GameHeader';
+import GameHeader from '@/components/game-header/GameHeader';
 import { getUser } from '@/lib/actions/user/getUser.action';
 import { redirect } from 'next/navigation';
 
@@ -16,7 +16,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <body className={`${inter.className} main-container`}>
-      <div className='w-full flex justify-center min-h-screen bg-fixed bg-cover bg-center' style={{ backgroundImage: 'url("/images/game-image.jpg")' }}>
+      <div className='w-full flex justify-center min-h-screen bg-fixed bg-cover bg-center' style={{ backgroundImage: 'url("/images/game-image.webp")' }}>
         <Toaster
           toastOptions={{
             className: '',

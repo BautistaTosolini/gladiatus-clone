@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <body>
       <LandingNavbar />
-      <div className='w-full flex justify-center items-center min-h-screen bg-cover' style={{ backgroundImage: 'url("/images/landing-page-image.jpg")' }}>
+      <div className='w-full flex justify-center items-center min-h-screen bg-cover' style={{ backgroundImage: 'url("/images/landing-page-image.webp")' }}>
         <Toaster
           toastOptions={{
             className: '',

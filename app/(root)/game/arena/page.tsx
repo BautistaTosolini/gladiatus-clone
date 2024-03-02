@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
-import ArenaContent from '@/components/shared/ArenaContent';
+import ArenaContent from '@/components/content/ArenaContent';
 import { getUser } from '@/lib/actions/user/getUser.action';
 import { getArenaRivals } from '@/lib/actions/battle/getArenaRivals.action';
 import Image from 'next/image';

@@ -1,7 +1,7 @@
 import { UserInterface } from '@/lib/interfaces/user.interface';
-import GameHeaderStats from '@/components/shared/game-header/GameHeaderStats';
-import GameHeaderExpeditionTimer from '@/components/shared/game-header/GameHeaderExpeditionTimer';
-import GameHeaderArenaTimer from '@/components/shared/game-header/GameHeaderArenaTimer';
+import GameHeaderStats from '@/components/game-header/GameHeaderStats';
+import GameHeaderExpeditionTimer from '@/components/game-header/GameHeaderExpeditionTimer';
+import GameHeaderArenaTimer from '@/components/game-header/GameHeaderArenaTimer';
 
 const GameHeader = ({ user }: { user: UserInterface }) => {
   const character = user.character;

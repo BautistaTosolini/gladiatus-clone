@@ -59,7 +59,7 @@ const Onboarding = () => {
         <div className='flex flex-row gap-4 justify-center'>
           <div>
             <Image 
-              src={'/characters/male/character-lvl0.jpg'}
+              src={'/characters/male/character-lvl-0.jpg'}
               width={168}
               height={194}
               alt='male character'
@@ -69,7 +69,7 @@ const Onboarding = () => {
           </div>
           <div>
             <Image 
-              src={'/characters/female/character-lvl0.jpg'}
+              src={'/characters/female/character-lvl-0.jpg'}
               width={168}
               height={194}
               alt='female character'

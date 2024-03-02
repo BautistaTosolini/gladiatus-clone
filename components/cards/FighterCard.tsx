@@ -31,7 +31,7 @@ const FighterCard = ({ name, level, strength, endurance, dexterity, agility, int
       </h2>
       <Image 
         className='drop-shadow-xl'
-        src={isEnemy ? `/enemies/${expedition}/${image}.jpg` : `/characters/${image}/character-lvl${roundDownToNearestMultipleOf10(level)}.jpg`}
+        src={isEnemy ? `/enemies/${expedition}/${image}.jpg` : `/characters/${image}/character-lvl-${roundDownToNearestMultipleOf10(level)}.jpg`}
         width={168}
         height={194}
         alt='character'

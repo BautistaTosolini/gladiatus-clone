@@ -1,4 +1,4 @@
-import HighscoreContent from '@/components/shared/HighscoreContent'
+import HighscoreContent from '@/components/content/HighscoreContent'
 import { getArenaHighscore } from '@/lib/actions/character/getArenaHighscore'
 import { getUser } from '@/lib/actions/user/getUser.action'
 import { redirect } from 'next/navigation'

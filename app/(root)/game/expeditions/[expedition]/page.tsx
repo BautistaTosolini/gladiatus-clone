@@ -4,7 +4,7 @@ import { getUser } from '@/lib/actions/user/getUser.action';
 import { redirect } from 'next/navigation';
 import { expeditions } from '@/constants/expeditions';
 import NoResults from '@/components/shared/NoResults';
-import ExpeditionContent from '@/components/shared/ExpeditionContent';
+import ExpeditionContent from '@/components/content/ExpeditionContent';
 
 const Page = async ({ params }: { params: { expedition: string } }) => {
   const user = await getUser().catch(() => redirect('/'));

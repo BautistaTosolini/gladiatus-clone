@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] });
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <body className={`${inter.className} main-container`}>
-      <div className='w-full flex justify-center min-h-screen bg-fixed bg-cover bg-center' style={{ backgroundImage: 'url("/images/game-image.jpg")' }}>
+      <div className='w-full flex justify-center min-h-screen bg-fixed bg-cover bg-center' style={{ backgroundImage: 'url("/images/game-image.webp")' }}>
         <Toaster
           toastOptions={{
             className: '',

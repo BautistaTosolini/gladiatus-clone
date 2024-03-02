@@ -1,6 +1,6 @@
 import { getUser } from '@/lib/actions/user/getUser.action';
 import { redirect } from 'next/navigation';
-import TrainingContent from '@/components/shared/TrainingContent';
+import TrainingContent from '@/components/content/TrainingContent';
 import { UserInterface } from '@/lib/interfaces/user.interface';
 
 const Page = async () => {

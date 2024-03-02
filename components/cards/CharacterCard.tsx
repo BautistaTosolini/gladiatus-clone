@@ -21,7 +21,7 @@ const CharacterCard = ({ character }: { character: CharacterInterface }) => {
       </h2>
       <Image 
         className='drop-shadow-xl'
-        src={`/characters/${character.gender}/character-lvl${roundDownToNearestMultipleOf10(character.level)}.jpg`}
+        src={`/characters/${character.gender}/character-lvl-${roundDownToNearestMultipleOf10(character.level)}.jpg`}
         width={168}
         height={194}
         alt='character'

@@ -50,8 +50,6 @@ const CooldownTimer = ({ name, message, cooldown, characterLastBattle, redirect 
 
   if (timeRemaining <= 0) progressPercentage = 100;
 
-  console.log(name, redirect)
-
   return (
     <div className='flex flex-row gap-1 font-semibold text-red3 items-center justify-between w-full px-2'>
       <Image 
