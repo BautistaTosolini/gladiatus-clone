@@ -48,6 +48,7 @@ const CooldownTimer = ({ name, message, cooldown, characterLastBattle, redirect 
 
   let progressPercentage = Math.round(((cooldown - timeRemaining) / cooldown) * 100)
 
+  // Sometimes the percentage calculation gives 98 or 99 if the cooldown its too short, this will avoid the progress bar being incompleted when the timer is done.
   if (timeRemaining <= 0) progressPercentage = 100;
 
   return (
@@ -58,7 +59,6 @@ const CooldownTimer = ({ name, message, cooldown, characterLastBattle, redirect 
         height={19}
         alt={name}
       />
-      {/* Sometimes the percentage calculation gives 98 or 99 if the cooldown its too short, this will avoid the progress bar being incompleted when the timer is done. */}
       <div 
         className={`progressbar bg-brown2 ${progressPercentage >= 100 && redirect && 'cursor-pointer hover:brightness-110'}`}
         onClick={progressPercentage >= 100 && redirect ? () => router.push(`/game/${redirect}`) : () => {}}

@@ -36,7 +36,7 @@ export const expeditionEnemies: ExpeditionEnemies = {
       charisma: [3, 3],
       experience: [1, 1],
       crowns: [26, 72],
-      items: ['steel_blade', 'wooden_shield'],
+      items: ['short_sword'],
       id: 0,
     },
     lynx: {
@@ -51,7 +51,7 @@ export const expeditionEnemies: ExpeditionEnemies = {
       charisma: [6, 9, 12, 15],
       experience: [1, 1],
       crowns: [68, 176],
-      items: ['plate_helmet', 'iron_chest', 'reinforced_boots'],
+      // items: ['plate_helmet', 'iron_chest', 'reinforced_boots'],
       id: 1,
     },
     wolf: {
@@ -66,7 +66,7 @@ export const expeditionEnemies: ExpeditionEnemies = {
       charisma: [12, 15, 18, 21, 25],
       experience: [1, 3],
       crowns: [116, 261],
-      items: ['runic_sword'],
+      // items: ['runic_sword'],
       id: 2,
     },
     bear: {
@@ -81,7 +81,7 @@ export const expeditionEnemies: ExpeditionEnemies = {
       charisma: [22, 25, 28],
       experience: [3, 3],
       crowns: [293, 383],
-      items: ['rock_of_aegis', 'vanguard_breastplate'],
+      // items: ['rock_of_aegis', 'vanguard_breastplate'],
       boss: true,
       id: 4,
     },

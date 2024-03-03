@@ -70,6 +70,19 @@ const characterSchema = new mongoose.Schema({
   arenaLastBattle: {
     type: Date,
     default: new Date(Date.now() - 10 * 60 * 1000),
+  },
+  inventory: {
+    type: [[{ type: mongoose.Schema.Types.Mixed }]],
+    default: [
+      [null, null, null, null, null],
+      [null, null, null, null, null],
+      [null, null, null, null, null],
+      [null, null, null, null, null],
+      [null, null, null, null, null],
+      [null, null, null, null, null],
+      [null, null, null, null, null],
+      [null, null, null, null, null],
+    ]
   }
 }, {
   timestamps: true
