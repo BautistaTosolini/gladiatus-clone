@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
+import { Github, Linkedin } from 'lucide-react';
 
 const LandingNavbar = () => {
   const router = useRouter();
@@ -15,7 +16,14 @@ const LandingNavbar = () => {
       >
         Gladiatus Clone
       </Link>
-      <div className='gap-4 flex'>
+      <div className='gap-4 flex items-center'>
+        <div className='flex gap-4'>
+          <span className='text-cream2 hover:text-gold transition'>
+            <Link href='https://github.com/BautistaTosolini/gladiatus-clone'>
+              <Github />
+            </Link>
+          </span>
+        </div>
         <Button 
           className='red-card text-cream2 text-center font-semibold text-md cursor-pointer hover:text-gold hover:border-gold transition rounded-sm hover:bg-red h-8 w-32'
           onClick={() => router.push('/sign-in')}

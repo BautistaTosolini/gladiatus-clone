@@ -1,6 +1,6 @@
 import { calculatePower } from '@/lib/utils/characterUtils';
 import Image from 'next/image';
-import ProgressBar from '@/components/shared/ProgressBar';
+import ProgressBar from '@/components/arena/ProgressBar';
 import { CharacterInterface } from '@/lib/interfaces/character.interface';
 import { calculateNextLevelExperience, calculateProgressPercent } from '@/lib/utils';
 
