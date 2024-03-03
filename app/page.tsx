@@ -34,7 +34,7 @@ export default function Home() {
             <div>
               <Button 
                 onClick={() => router.push('/sign-in')}
-                className='general-button w-full font-semibold hover:brightness-110 hover:bg-brown text-brown2 w-40'
+                className='general-button font-semibold hover:brightness-110 hover:bg-brown text-brown2 w-40'
               >
                 Play Now
               </Button>
