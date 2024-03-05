@@ -67,7 +67,7 @@ JWT_SECRET=
 NODE_ENV=
 
 # Once the variables are set up, run the project.
-npm run start:dev
+npm run dev
 
 # The server will initialize in the <http://localhost:3000>
 ```
